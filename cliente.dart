@@ -1,10 +1,17 @@
+
 import 'dart:io';
 
-void main()async{
-	WebSocket.connect('ws.//192.169.60.122:8000').then((WebSocket sock){
-		var socket =sock;
-		socket.listen((item) {
-    		WebSocket.send("hello world");
-    	});
-	});
+
+
+void main()async {
+  WebSocket socket;
+  bool open = false;
+  socket =await WebSocket.connect('ws://localhost:5600');
+  
+  socket.listen((_) => open = true);
 }
+
+void socketMessage( event){
+  print('I recived: ${event.data}');
+}
+
